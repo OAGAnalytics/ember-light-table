@@ -2,6 +2,7 @@ import ObjectProxy from '@ember/object/proxy';
 import { computed } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 import fixProto from 'ember-light-table/utils/fix-proto';
+import { assign } from '@ember/polyfills';
 
 /**
  * @module Table
@@ -90,7 +91,7 @@ export default class Row extends ObjectProxy.extend({
     // HACK: Passing properties to super instead of manually setting them fixes the
     //       implicit run loop creation for Ember 2.12.
     //       https://travis-ci.org/offirgolan/ember-light-table/jobs/344818839#L790
-    super(Object.assign({}, options, { content }));
+    super(assign({}, options, { content }));
 
     if (content instanceof Row) {
       return content;
