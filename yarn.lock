@@ -832,10 +832,9 @@
   dependencies:
     "@glimmer/util" "^0.27.0"
 
-"@html-next/vertical-collection@^1.0.0-beta.13":
+"@html-next/vertical-collection@github:bekzod/vertical-collection#disabled-assertion":
   version "1.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/@html-next/vertical-collection/-/vertical-collection-1.0.0-beta.13.tgz#0cd7fbe813fef8c7daea3c46a3d4167cbd8db682"
-  integrity sha512-YFs+toYLFSCiZSv1kkb3IPvrcVJHVX6q7vkzP0qb2Rvd0s61YqgpPDqtZ8sVViip0Lu3kw+Hs9fysjpAFqJDzQ==
+  resolved "https://codeload.github.com/bekzod/vertical-collection/tar.gz/60426e1dc28dfa4440add55a4b85b5b368c6e97e"
   dependencies:
     babel-plugin-transform-es2015-block-scoping "^6.24.1"
     babel6-plugin-strip-class-callcheck "^6.0.0"
