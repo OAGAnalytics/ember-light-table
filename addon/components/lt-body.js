@@ -392,8 +392,8 @@ export default Component.extend({
             targetScrollOffset = rowElement.offsetTop;
           }
         }
+        this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
       });
-      this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
     }
   },
 
