@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
 import layout from 'ember-light-table/templates/components/lt-body';
-import { run } from '@ember/runloop';
+import { run, schedule } from '@ember/runloop';
 import Row from 'ember-light-table/classes/Row';
 
 /**
@@ -384,14 +384,15 @@ export default Component.extend({
         hasReachedTargetScrollOffset: targetScrollOffset <= 0
       });
     } else if (scrollToRow !== _scrollToRow) {
-      if (scrollToRow instanceof Row) {
-        let rowElement = this.element.querySelector(`[data-row-id=${scrollToRow.get('rowId')}]`);
+      schedule('afterRender', this, ()=> {
+        if (scrollToRow instanceof Row) {
+          let rowElement = this.element.querySelector(`[data-row-id=${scrollToRow.get('rowId')}]`);
 
-        if (rowElement instanceof Element) {
-          targetScrollOffset = rowElement.offsetTop;
+          if (rowElement instanceof Element) {
+            targetScrollOffset = rowElement.offsetTop;
+          }
         }
-      }
-
+      });
       this.setProperties({ targetScrollOffset, hasReachedTargetScrollOffset: true });
     }
   },
