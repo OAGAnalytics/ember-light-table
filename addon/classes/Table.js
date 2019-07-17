@@ -132,8 +132,9 @@ export default class Table extends EmberObject.extend({
       arr.pushObjects(c.get('isGroupColumn') ? c.get('subColumns') : [c]);
       return arr;
     }, emberArray([]));
-  }).readOnly()
-}) {
+  }).readOnly(),
+
+
   /**
    * @class Table
    * @constructor
@@ -146,9 +147,7 @@ export default class Table extends EmberObject.extend({
    * @param  {Object}  options.rowOptions Options hash passed through to
    *           `createRow(content, options)`.
    */
-  constructor(columns = [], rows = [], options = {}) {
-    super();
-
+  init({ columns = [], rows = [], options = {} }) {
     assert('[ember-light-table] columns must be an array if defined', isArray(columns));
     assert('[ember-light-table] rows must be an array if defined', isArray(rows));
 
@@ -169,8 +168,9 @@ export default class Table extends EmberObject.extend({
     });
   }
 
+}) {
   destroy() {
-    this._super(...arguments);
+    super.destroy(...arguments);
 
     let rows = this.get('rows');
 
@@ -410,7 +410,7 @@ export default class Table extends EmberObject.extend({
    * @return {Row}
    */
   static createRow(content, options = {}) {
-    return new Row(content, options);
+    return Row.create(Object.assign({}, options, { content }));
   }
 
   /**
@@ -433,7 +433,7 @@ export default class Table extends EmberObject.extend({
    * @return {Column}
    */
   static createColumn(column) {
-    return new Column(column);
+    return Column.create(column);
   }
 
   /**
@@ -447,6 +447,3 @@ export default class Table extends EmberObject.extend({
     return columns.map((c) => Table.createColumn(c));
   }
 }
-
-// https://github.com/offirgolan/ember-light-table/issues/436#issuecomment-310138868
-fixProto(Table);
