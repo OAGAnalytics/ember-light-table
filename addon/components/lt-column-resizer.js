@@ -32,7 +32,7 @@ export default Component.extend({
   willDestroyElement() {
     this._super(...arguments);
     document.removeEventListener('mousemove', this.__mouseMove);
-    document.removeEventListener('mouseip', this.__mouseUp);
+    document.removeEventListener('mouseup', this.__mouseUp);
   },
 
   click(e) {
@@ -90,9 +90,14 @@ export default Component.extend({
       let index = this.get('table.visibleColumns').indexOf(this.get('column')) + 1;
       let table = closest(this.get('element'), TOP_LEVEL_CLASS);
 
-      column.width = width;
-      table.querySelector(`thead td.lt-scaffolding:nth-child(${index})`).style.width = width;
-      table.querySelector(`tfoot td.lt-scaffolding:nth-child(${index})`).style.width = width;
+      column.style.width = width;
+
+      const theadTd = table.querySelector(`thead td.lt-scaffolding:nth-child(${index})`);
+      if(theadTd) { theadTd.style.width = width; }
+
+      const tfootTd = table.querySelector(`tfoot td.lt-scaffolding:nth-child(${index})`);
+      if(tfootTd) {  tfootTd.style.width = width; }
+
       if (resizeOnDrag) {
         let cols = table.querySelectorAll(`tbody td:nth-child(${index})`);
         cols.forEach((col) => {
